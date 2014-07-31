@@ -1,7 +1,12 @@
-<h1>Listing team_members</h1>
+<h1>Listing team members</h1>
 
 <table>
   <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Phone number</th>
+    <th>Email</th>
+    <th>Company</th>
     <th>Team</th>
     <th>Experience level</th>
     <th>Qualification</th>
@@ -13,6 +18,11 @@
 
 <% @team_members.each do |team_member| %>
   <tr>
+    <td><%= team_member.person.first_name %></td>
+    <td><%= team_member.person.last_name %></td>
+    <td><%= team_member.person.phone_number %></td>
+    <td><%= team_member.person.email %></td>
+    <td><%= team_member.person.company.company_name %></td>
     <td><%= team_member.team %></td>
     <td><%= team_member.experience_level %></td>
     <td><%= team_member.qualification %></td>
@@ -26,4 +36,4 @@
 
 <br />
 
-<%= link_to 'New Team member', new_team_member_path %>
+<%= link_to 'New Team Member', new_team_member_path, class: "tiny button radius"  %>

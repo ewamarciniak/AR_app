@@ -1,0 +1,27 @@
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#"><b>Business manager</b></a></h1>
+      </li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+
+          <li> <%= link_to "Home", root_path, :class => "active" %></li>
+          <li> <%= link_to "Addresses", addresses_path, :class => "selected" %></li>
+          <li> <%= link_to "Companies", companies_path, :class => " #{'selected' if @tab=='recipes'}" %></li>
+          <li> <%= link_to "Clients", clients_path, :class => "selected" %></li>
+          <li> <%= link_to "Team Members", team_members_path, :class => "selected" %></li>
+          <li> <%= link_to "Projects", projects_path, :class => "selected" %></li>
+          <li> <%= link_to "Documents",documents_path, :class => "selected" %></li>
+          <li> <%= link_to "Legal contracts", legal_contracts_path, :class => "selected" %></li>
+  </ul>
+
+  </section>
+  </nav>
+</div>
