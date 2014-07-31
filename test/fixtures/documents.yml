@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  project: 
+  type: 
+  revision_number: 1
+
+two:
+  project: 
+  type: 
+  revision_number: 1

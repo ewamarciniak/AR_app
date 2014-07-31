@@ -1,0 +1,29 @@
+<h1>Listing legal_contracts</h1>
+
+<table>
+  <tr>
+    <th>Project</th>
+    <th>Signed on</th>
+    <th>Revised on</th>
+    <th>Copy stored</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @legal_contracts.each do |legal_contract| %>
+  <tr>
+    <td><%= legal_contract.project %></td>
+    <td><%= legal_contract.signed_on %></td>
+    <td><%= legal_contract.revised_on %></td>
+    <td><%= legal_contract.copy_stored %></td>
+    <td><%= link_to 'Show', legal_contract %></td>
+    <td><%= link_to 'Edit', edit_legal_contract_path(legal_contract) %></td>
+    <td><%= link_to 'Destroy', legal_contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Legal contract', new_legal_contract_path %>

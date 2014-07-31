@@ -1,0 +1,2 @@
+module LegalContractsHelper
+end

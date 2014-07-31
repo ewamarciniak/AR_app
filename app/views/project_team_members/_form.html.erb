@@ -1,0 +1,25 @@
+<%= form_for(@project_team_member) do |f| %>
+  <% if @project_team_member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project_team_member.errors.count, "error") %> prohibited this project_team_member from being saved:</h2>
+
+      <ul>
+      <% @project_team_member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :project %><br />
+    <%= f.text_field :project %>
+  </div>
+  <div class="field">
+    <%= f.label :team_member %><br />
+    <%= f.text_field :team_member %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

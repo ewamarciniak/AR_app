@@ -1,4 +1,28 @@
 ActiveRecordApp::Application.routes.draw do
+  resources :documents
+
+
+  resources :legal_contracts
+
+
+  resources :project_team_members
+
+
+  resources :projects
+
+
+  resources :team_members
+
+
+  resources :clients
+
+
+  resources :companies
+
+
+  resources :addresses
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

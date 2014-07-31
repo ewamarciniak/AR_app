@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  client: 
+  budget: 1.5
+  delivery_deadline: 2014-07-31
+  status: MyString
+
+two:
+  client: 
+  budget: 1.5
+  delivery_deadline: 2014-07-31
+  status: MyString

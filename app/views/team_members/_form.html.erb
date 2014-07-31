@@ -1,0 +1,33 @@
+<%= form_for(@team_member) do |f| %>
+  <% if @team_member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team_member.errors.count, "error") %> prohibited this team_member from being saved:</h2>
+
+      <ul>
+      <% @team_member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :team %><br />
+    <%= f.text_field :team %>
+  </div>
+  <div class="field">
+    <%= f.label :experience_level %><br />
+    <%= f.text_field :experience_level %>
+  </div>
+  <div class="field">
+    <%= f.label :qualification %><br />
+    <%= f.text_field :qualification %>
+  </div>
+  <div class="field">
+    <%= f.label :lead %><br />
+    <%= f.check_box :lead %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

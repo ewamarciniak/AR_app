@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  team: MyString
+  experience_level: MyString
+  qualification: MyString
+  lead: false
+
+two:
+  team: MyString
+  experience_level: MyString
+  qualification: MyString
+  lead: false

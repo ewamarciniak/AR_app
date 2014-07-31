@@ -1,0 +1,56 @@
+<%= form_for(@company) do |f| %>
+    <% if @company.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+          <ul>
+            <% @company.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :company_name %><br />
+      <%= f.text_field :company_name %>
+    </div>
+    <div class="field">
+      <%= f.label :reg_number %><br />
+      <%= f.text_field :reg_number %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_number %><br />
+      <%= f.text_field :phone_number %>
+    </div>
+    <div class="field">
+      <%= f.label :fax_number %><br />
+      <%= f.text_field :fax_number %>
+    </div>
+
+    <%= f.fields_for :address do |ff| %>
+        <div class="field">
+          <%= ff.label :line1 %><br />
+          <%= ff.text_field :line1 %>
+        </div>
+        <div class="field">
+          <%= ff.label :line2 %><br />
+          <%= ff.text_field :line2 %>
+        </div>
+        <div class="field">
+          <%= ff.label :postcode %><br />
+          <%= ff.text_field :postcode %>
+        </div>
+        <div class="field">
+          <%= ff.label :city %><br />
+          <%= ff.text_field :city %>
+        </div>
+        <div class="field">
+          <%= ff.label :county %><br />
+          <%= ff.text_field :county %>
+        </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

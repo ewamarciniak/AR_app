@@ -1,0 +1,51 @@
+<%= form_for(@client) do |f| %>
+    <% if @client.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+          <ul>
+            <% @client.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.fields_for :person do |ff| %>
+        <div>
+          <%= ff.label :first_name %>
+          <%= ff.text_field :first_name %>
+        </div>
+
+        <div>
+          <%= ff.label :last_name %>
+          <%= ff.text_field :last_name %>
+        </div>
+        <div>
+          <%= ff.label :phone_number %>
+          <%= ff.text_field :phone_number %>
+        </div>
+
+        <div>
+          <%= ff.label :email %>
+          <%= ff.text_field :email %>
+        </div>
+        <div class="small-3 columns">
+          <%= f.label :company, class: "right inline" %>
+        </div>
+        <div class="small-9 columns">
+          <%= ff.collection_select(:company_id, Company.all, :id, :company_name, {include_blank: true, :data => {:placeholder => "Select company"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", }) %>
+        </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :pref_method_of_contact %><br />
+      <%= f.text_field :pref_method_of_contact %>
+    </div>
+    <div class="field">
+      <%= f.label :pref_hours_of_contact %><br />
+      <%= f.text_field :pref_hours_of_contact %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

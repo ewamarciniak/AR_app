@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pref_method_of_contact: MyString
+  pref_hours_of_contact: MyString
+
+two:
+  pref_method_of_contact: MyString
+  pref_hours_of_contact: MyString

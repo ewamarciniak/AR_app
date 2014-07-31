@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Project:</b>
+  <%= @document.project %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @document.type %>
+</p>
+
+<p>
+  <b>Revision number:</b>
+  <%= @document.revision_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>

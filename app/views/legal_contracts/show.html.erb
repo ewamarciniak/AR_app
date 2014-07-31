@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Project:</b>
+  <%= @legal_contract.project %>
+</p>
+
+<p>
+  <b>Signed on:</b>
+  <%= @legal_contract.signed_on %>
+</p>
+
+<p>
+  <b>Revised on:</b>
+  <%= @legal_contract.revised_on %>
+</p>
+
+<p>
+  <b>Copy stored:</b>
+  <%= @legal_contract.copy_stored %>
+</p>
+
+
+<%= link_to 'Edit', edit_legal_contract_path(@legal_contract) %> |
+<%= link_to 'Back', legal_contracts_path %>

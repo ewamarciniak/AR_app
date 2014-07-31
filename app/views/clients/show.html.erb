@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pref method of contact:</b>
+  <%= @client.pref_method_of_contact %>
+</p>
+
+<p>
+  <b>Pref hours of contact:</b>
+  <%= @client.pref_hours_of_contact %>
+</p>
+
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>
