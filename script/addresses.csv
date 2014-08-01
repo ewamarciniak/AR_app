@@ -1,11 +1,11 @@
 7 Talbot Street,nil,1,Dublin,co. Dublin
 60 Happy Avenue,nil,nil,Duleek,co. Meath
-70 O'Connel Street,Clontarf,nil,Dundalk,co. Louth
+70 O''Connell Street,Clontarf,nil,Dundalk,co. Louth
 43 Mount Prospect Avenue,nil,nil,Ballycasey,co. Clare
 74 Amiens Street,Clontarf,nil,Letterkenny,co. Donegal
 53 Nassau Street,nil,nil,Wexford,co. Wexford
 3 North King Street,nil,nil,Cobh,co. Cork
-29 Wicklow Street,nil,nil,Cork,co.Cork
+29 Wicklow Street,nil,nil,Cork,co. Cork
 38 Moore Street,Clontarf,nil,Killarney,co. Kerry
 53 Macarena Road,the red door beside Centra,nil,Galway,co. Galway
 43  Mount Prospect Lawns,nil,nil,Enniskerry,co. Wicklow
@@ -18,7 +18,7 @@
 16 Actual Road,(above SPAR),nil,Dun Laoghaire,co. Dublin
 20 Grafton Street,nil,nil,Cobh,co. Cork
 95 Dame Street,nil,nil,Sligo,co. Sligo
-81 Wexford Street,nil,nil,Kinsale,co.Cork
+81 Wexford Street,nil,nil,Kinsale,co. Cork
 51 Some Road,Clontarf,nil,Killarney,co. Kerry
 31 Rogerson Quay,nil,nil,Galway,co. Galway
 47 Towsend Street,Smithfield,nil,Tullamore,co. Offaly
@@ -32,7 +32,7 @@
 10 Bachelors Walk,Smithfield,nil,Dun Laoghaire,co. Dublin
 31 Amiens Street,the red door beside Centra,nil,Kinsale,co. Cork
 92 Dublin Road,the red door beside Centra,nil,Sligo,co. Sligo
-17 Dublin Road,nil,nil,Cork,co.Cork
+17 Dublin Road,nil,nil,Cork,co. Cork
 3 Henry Street,Stillorgan,nil,Killarney,co. Kerry
 58 Capel Street,Stillorgan,nil,Enniskerry,co. Wicklow
 29 Capel Street,nil,2,Dublin,co. Dublin
@@ -50,12 +50,12 @@
 7 Merrior Row,Stillorgan,nil,Westport,co. Mayo
 90 Talbot Street,the red door beside Centra,1,Dublin,co. Dublin
 61 Happy Avenue,nil,nil,Duleek,co. Meath
-71,O'Connel  Street,Clontarf,nil,Dundalk,co. Louth
+71 O''Connell Street,Clontarf,nil,Dundalk,co. Louth
 41 Mount Prospect Avenue,nil,nil,Ballycasey,co. Clare
 84 Amiens Street,nil,nil,Letterkenny,co. Donegal
 50 Nassau Street,nil,nil,Wexford,co. Wexford
 10 North King Street,the red door beside Centra,nil,Cobh,co. Cork
-90 Wicklow Street,Clontarf,nil,Cork,co.Cork
+90 Wicklow Street,Clontarf,nil,Cork,co. Cork
 39 Moore Street,the red door beside Centra,nil,Killarney,co. Kerry
 23 Macarena Road,Stillorgan,nil,Galway,co. Galway
 23  Mount Prospect Lawns,the red door beside Centra,nil,Enniskerry,co. Wicklow
@@ -68,7 +68,7 @@
 36 Actual Road,Stillorgan,nil,Dun Laoghaire,co. Dublin
 29  Grafton Street,nil,nil,Cobh,co. Cork
 99 Dame Street,Smithfield,nil,Sligo,co. Sligo
-91 Wexford Street,nil,nil,Kinsale,co.Cork
+91 Wexford Street,nil,nil,Kinsale,co. Cork
 50 Some Road,nil,nil,Killarney,co. Kerry
 32 Rogerson Quay,nil,nil,Galway,co. Galway
 40 Towsend Street,Clontarf,nil,Tullamore,co. Offaly
@@ -82,7 +82,7 @@
 19 Bachelors Walk,Stillorgan,nil,Dun Laoghaire,co. Dublin
 41 Amiens Street,Stillorgan,nil,Kinsale,co. Cork
 102 Dublin Road,(above SPAR),nil,Sligo,co. Sligo
-19 Dublin Road,nil,nil,Cork,co.Cork
+19 Dublin Road,nil,nil,Cork,co. Cork
 39 Henry Street,(above SPAR),nil,Killarney,co. Kerry
 53 Capel Street,nil,nil,Enniskerry,co. Wicklow
 39 Capel Street,nil,2,Dublin,co. Dublin
@@ -96,5 +96,5 @@
 18 PParnell Street,the red door beside Centra,nil,Dowra,co. Cavan
 89 South William Street,Smithfield,nil,Waterford,co. Waterford
 30 South Merrion Street,(above SPAR),8,Dublin,co. Dublin
-77 Merrion Square,nil,Ashbourne,co. Meath
-87 Merrior Row,Clontarf,nil,Westport,co. Mayo
+222 South William Street,Smithfield,nil,Waterford,co. Waterford
+87 Merrion Row,Clontarf,nil,Westport,co. Mayo

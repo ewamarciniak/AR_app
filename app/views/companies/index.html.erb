@@ -18,8 +18,8 @@
     <td><%= company.reg_number %></td>
     <td><%= company.phone_number %></td>
     <td><%= company.fax_number %></td>
-    <td><%= company.address %></td>
-    <% if company.team_members_present? %>
+    <td><%= link_to "Address", company.address %> </td>
+    <% if team_members_present?(company) %>
         <td><%= link_to "Employees", team_members_path %> %></td>
      <% end %>
 
