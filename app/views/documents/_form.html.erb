@@ -1,29 +1,43 @@
 <%= form_for(@document) do |f| %>
-  <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+    <% if @document.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
 
-      <ul>
-      <% @document.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @document.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :project, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :project, :placeholder => "(optional)" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :project %><br />
-    <%= f.text_field :project %>
-  </div>
-  <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
-  </div>
-  <div class="field">
-    <%= f.label :revision_number %><br />
-    <%= f.number_field :revision_number %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :doc_type, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :doc_type, :placeholder => "(optional)" %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :revision_number, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.number_field :revision_number, :placeholder => "(optional)" %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= f.submit %>
+      </div>
+    </div>
 <% end %>

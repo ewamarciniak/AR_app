@@ -10,47 +10,51 @@
           </ul>
         </div>
     <% end %>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :company_name, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :company_name %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :reg_number, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :reg_number %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :phone_number, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :phone_number %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :fax_number, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :fax_number %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :address, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.collection_select(:address_id, Address.all, :id, :full_address, {include_blank: true, :data => {:placeholder => "Select address"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", }) %>
 
-    <div class="field">
-      <%= f.label :company_name %><br />
-      <%= f.text_field :company_name %>
-    </div>
-    <div class="field">
-      <%= f.label :reg_number %><br />
-      <%= f.text_field :reg_number %>
-    </div>
-    <div class="field">
-      <%= f.label :phone_number %><br />
-      <%= f.text_field :phone_number %>
-    </div>
-    <div class="field">
-      <%= f.label :fax_number %><br />
-      <%= f.text_field :fax_number %>
+      </div>
     </div>
 
-    <%= f.fields_for :address do |ff| %>
-        <div class="field">
-          <%= ff.label :line1 %><br />
-          <%= ff.text_field :line1 %>
-        </div>
-        <div class="field">
-          <%= ff.label :line2 %><br />
-          <%= ff.text_field :line2 %>
-        </div>
-        <div class="field">
-          <%= ff.label :postcode %><br />
-          <%= ff.text_field :postcode %>
-        </div>
-        <div class="field">
-          <%= ff.label :city %><br />
-          <%= ff.text_field :city %>
-        </div>
-        <div class="field">
-          <%= ff.label :county %><br />
-          <%= ff.text_field :county %>
-        </div>
-    <% end %>
-    <div class="actions">
-      <%= f.submit %>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= f.submit %>
+      </div>
     </div>
 <% end %>

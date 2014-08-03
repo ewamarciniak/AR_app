@@ -1,37 +1,60 @@
 <%= form_for(@address) do |f| %>
-  <% if @address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
+    <% if @address.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
 
-      <ul>
-      <% @address.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @address.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :line1, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :line1 %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :line1 %><br />
-    <%= f.text_field :line1 %>
-  </div>
-  <div class="field">
-    <%= f.label :line2 %><br />
-    <%= f.text_field :line2 %>
-  </div>
-  <div class="field">
-    <%= f.label :postcode %><br />
-    <%= f.text_field :postcode %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :county %><br />
-    <%= f.text_field :county %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :line2, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :line2, :placeholder => "(optional)"  %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :postcode, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.select :postcode, Address::POSTCODES, :prompt => 'Select a postcode (optional)' %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :city, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :city %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :county, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.select :postcode, Address::COUNTIES, :prompt => 'Select a county (optional)' %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= f.submit %>
+      </div>
+    </div>
 <% end %>

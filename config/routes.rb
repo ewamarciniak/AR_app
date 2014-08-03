@@ -5,13 +5,14 @@ ActiveRecordApp::Application.routes.draw do
   resources :legal_contracts
 
 
-  resources :project_team_members
+  resources :projects do
+    resources :team_members
+  end
 
 
-  resources :projects
-
-
-  resources :team_members
+  resources :team_members do
+    resources :projects
+  end
 
 
   resources :clients
@@ -21,6 +22,7 @@ ActiveRecordApp::Application.routes.draw do
 
 
   resources :addresses
+
 
 
   # The priority is based upon order of creation:
@@ -72,7 +74,7 @@ ActiveRecordApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  root :to => 'companies#index'
 
   # See how all your routes lay out with "rake routes"
 

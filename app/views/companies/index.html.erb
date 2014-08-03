@@ -7,6 +7,7 @@
     <th>Phone number</th>
     <th>Fax number</th>
     <th>Address</th>
+    <th>People</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,10 +19,16 @@
     <td><%= company.reg_number %></td>
     <td><%= company.phone_number %></td>
     <td><%= company.fax_number %></td>
-    <td><%= link_to "Address", company.address %> </td>
+    <td><%= link_to "Address details", company.address %> </td>
     <% if team_members_present?(company) %>
-        <td><%= link_to "Employees", team_members_path %> %></td>
-     <% end %>
+        <td><%= link_to "Employees", team_members_path %></td>
+    <% elsif is_client?(company) %>
+        <td><%= link_to "Client details", company_client(company.id) %></td>
+    <% else %>
+        <td><%= link_to "Add Client", new_client_path %></td>
+        |
+        <td><%= link_to "Add Team Member", new_team_member_path %></td>
+    <% end %>
 
     <td><%= link_to 'Show', company %></td>
     <td><%= link_to 'Edit', edit_company_path(company) %></td>

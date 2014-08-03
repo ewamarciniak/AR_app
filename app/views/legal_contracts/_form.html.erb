@@ -1,33 +1,59 @@
 <%= form_for(@legal_contract) do |f| %>
-  <% if @legal_contract.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@legal_contract.errors.count, "error") %> prohibited this legal_contract from being saved:</h2>
+    <% if @legal_contract.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@legal_contract.errors.count, "error") %> prohibited this legal_contract from being
+            saved:</h2>
 
-      <ul>
-      <% @legal_contract.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @legal_contract.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :project, class: "right inline"  %>
+        <br/>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :project%>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :project %><br />
-    <%= f.text_field :project %>
-  </div>
-  <div class="field">
-    <%= f.label :signed_on %><br />
-    <%= f.date_select :signed_on %>
-  </div>
-  <div class="field">
-    <%= f.label :revised_on %><br />
-    <%= f.date_select :revised_on %>
-  </div>
-  <div class="field">
-    <%= f.label :copy_stored %><br />
-    <%= f.text_field :copy_stored %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :signed_on, class: "right inline", title: "Contract signing date", data: {tooltip: true} %>
+      </div>
+      <div class="small-7 columns left">
+        <div class="date">
+          <%= f.text_field :signed_on %>
+        </div>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :revised_on, class: "right inline"  %>
+      </div>
+      <div class="small-7 columns left">
+        <div class="date">
+          <%= f.text_field :revised_on, class: "right inline" %>
+        </div>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :copy_stored, class: "right inline"  %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :copy_stored %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= f.submit %>
+      </div>
+    </div>
 <% end %>

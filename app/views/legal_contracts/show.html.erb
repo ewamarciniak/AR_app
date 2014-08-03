@@ -1,25 +1,27 @@
+<h1>Contract details</h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Project:</b>
-  <%= @legal_contract.project %>
-</p>
+<table>
+  <tr>
+    <td class="bold">Project:</td>
+    <td><%= link_to 'Project details', @legal_contract.project %></td>
+  </tr>
 
-<p>
-  <b>Signed on:</b>
-  <%= @legal_contract.signed_on %>
-</p>
+  <tr>
+    <td class="bold">Signed on:</td>
+    <td><%= @legal_contract.signed_on %></td>
+  </tr>
 
-<p>
-  <b>Revised on:</b>
-  <%= @legal_contract.revised_on %>
-</p>
+  <tr>
+    <td class="bold">Revised on:</td>
+    <td><%= @legal_contract.revised_on %></td>
+  </tr>
 
-<p>
-  <b>Copy stored:</b>
-  <%= @legal_contract.copy_stored %>
-</p>
+  <tr>
+    <td class="bold">Copy stored:</td>
+    <td><%= @legal_contract.copy_stored %></td>
+  </tr>
+</table>
 
-
-<%= link_to 'Edit', edit_legal_contract_path(@legal_contract) %> |
-<%= link_to 'Back', legal_contracts_path %>
+<%= link_to 'Edit', edit_legal_contract_path(@legal_contract), class: "tiny button radius"  %>
+<%= link_to 'Back', legal_contracts_path, class: "tiny button radius"  %>

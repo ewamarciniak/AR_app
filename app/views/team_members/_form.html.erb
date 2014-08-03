@@ -10,6 +10,32 @@
       </ul>
     </div>
   <% end %>
+    <%= f.fields_for :person do |ff| %>
+        <div>
+          <%= ff.label :first_name %>
+          <%= ff.text_field :first_name %>
+        </div>
+
+        <div>
+          <%= ff.label :last_name %>
+          <%= ff.text_field :last_name %>
+        </div>
+        <div>
+          <%= ff.label :phone_number %>
+          <%= ff.text_field :phone_number %>
+        </div>
+
+        <div>
+          <%= ff.label :email %>
+          <%= ff.text_field :email %>
+        </div>
+        <div class="small-3 columns">
+          <%= f.label :company, class: "right inline" %>
+        </div>
+        <div class="small-7 columns">
+          <%= ff.collection_select(:company_id, Company.all, :id, :company_name, {include_blank: true, :data => {:placeholder => "Select company"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", }) %>
+        </div>
+    <% end %>
 
   <div class="field">
     <%= f.label :team %><br />

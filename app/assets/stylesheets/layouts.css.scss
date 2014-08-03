@@ -1,0 +1,42 @@
+label.inline {
+  margin: 0 0 1rem;
+  padding: 0.5625rem 1rem;
+}
+a:visited.button{
+  color: white !important;
+}
+h1{
+  font-size: 250%;
+  margin: 20px 0;
+}
+
+table td.bold {
+  font-weight: bold;
+}
+
+table th a:visited {
+  color: #2ba6cb;
+}
+table th a:hover {
+  color: #6c6c6c;
+  background: white;
+}
+table th a {
+  color: #2c8ab0;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}

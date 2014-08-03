@@ -1,25 +1,28 @@
+<h1>Project details</h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Client:</b>
-  <%= @project.client %>
-</p>
 
-<p>
-  <b>Budget:</b>
-  <%= @project.budget %>
-</p>
+<table>
+  <tr>
+    <td class="bold">Client:</td>
+    <td><%= link_to "#{@project.client.person.first_name} #{@project.client.person.last_name}/ #{@project.client.person.company.company_name}", @project.client %></td>
+  </tr>
 
-<p>
-  <b>Delivery deadline:</b>
-  <%= @project.delivery_deadline %>
-</p>
+  <tr>
+    <td class="bold">Budget:</td>
+    <td><%= @project.budget %></td>
+  </tr>
 
-<p>
-  <b>Status:</b>
-  <%= @project.status %>
-</p>
+  <tr>
+    <td class="bold">Delivery deadline:</td>
+    <td><%= @project.delivery_deadline %></td>
+  </tr>
 
+  <tr>
+    <td class="bold">Status:</td>
+    <td><%= @project.status  %></td>
+  </tr>
+</table>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Edit', edit_project_path(@project), class: "tiny button radius"  %>
+<%= link_to 'Back', projects_path, class: "tiny button radius"  %>

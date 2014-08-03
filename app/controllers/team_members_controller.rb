@@ -25,6 +25,7 @@ class TeamMembersController < ApplicationController
   # GET /team_members/new.json
   def new
     @team_member = TeamMember.new
+    @team_member.build_person
 
     respond_to do |format|
       format.html # new.html.erb
@@ -78,6 +79,16 @@ class TeamMembersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to team_members_url }
       format.json { head :no_content }
+    end
+  end
+
+  def project_list
+    require 'debugger'; debugger
+    @projects = Project.where(:team_member_id => params[:id] )
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @projects }
     end
   end
 end

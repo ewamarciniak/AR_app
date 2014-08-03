@@ -1,15 +1,36 @@
+<h1>Client details</h1>
 <p id="notice"><%= notice %></p>
+<table>
+  <tr>
+    <td class="bold">First name:</td>
+    <td><%= @client.person.first_name %></td>
+  </tr>
 
-<p>
-  <b>Pref method of contact:</b>
-  <%= @client.pref_method_of_contact %>
-</p>
+  <tr>
+    <td class="bold">Last name:</td>
+    <td><%= @client.person.last_name %></td>
+  </tr>
 
-<p>
-  <b>Pref hours of contact:</b>
-  <%= @client.pref_hours_of_contact %>
-</p>
+  <tr>
+    <td class="bold">Email:</td>
+    <td><%= @client.person.email %></td>
+  </tr>
 
+  <tr>
+    <td class="bold">Phone:</td>
+    <td><%= @client.person.phone_number %></td>
+  </tr>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+  <tr>
+    <td class="bold">Method of contact:</td>
+    <td><%= @client.pref_method_of_contact %></td>
+  </tr>
+
+  <tr>
+    <td class="bold">Hours of contact:</td>
+    <td><%= @client.pref_hours_of_contact %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_client_path(@client), class: "tiny button radius"  %>
+<%= link_to 'Back', clients_path, class: "tiny button radius"  %>

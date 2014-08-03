@@ -13,7 +13,7 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.client %></td>
+    <td><%= link_to "#{name(project.client.person)}/ #{project.client.person.company.company_name}",  project.client %></td>
     <td><%= project.budget %></td>
     <td><%= project.delivery_deadline %></td>
     <td><%= project.status %></td>

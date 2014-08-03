@@ -1,20 +1,26 @@
+<h1>Document details</h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Project:</b>
-  <%= @document.project %>
-</p>
 
-<p>
-  <b>Type:</b>
-  <%= @document.type %>
-</p>
+<table>
+  <tr>
+    <td class="bold">Project:</td>
+    <td><%= link_to 'Project details', @document.project %></td>
+  </tr>
 
-<p>
-  <b>Revision number:</b>
-  <%= @document.revision_number %>
-</p>
+  <tr>
+    <td class="bold">Document type:</td>
+    <td><%= @document.doc_type %></td>
+  </tr>
+
+  <tr>
+    <td class="bold">Revision number:</td>
+    <td><%= @document.revision_number %></td>
+  </tr>
+</table>
 
 
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
+
+
+<%= link_to 'Edit', edit_document_path(@document), class: "tiny button radius"  %>
+<%= link_to 'Back', documents_path, class: "tiny button radius"  %>

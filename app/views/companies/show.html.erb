@@ -1,30 +1,32 @@
+<h1>Company details</h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Company name:</b>
-  <%= @company.company_name %>
-</p>
+<table>
+  <tr>
+    <td class="bold">Company name:</td>
+    <td><%= @company.company_name %></td>
+  </tr>
 
-<p>
-  <b>Reg number:</b>
-  <%= @company.reg_number %>
-</p>
+  <tr>
+    <td class="bold">Reg number:</td>
+    <td><%= @company.reg_number %></td>
+  </tr>
 
-<p>
-  <b>Phone number:</b>
-  <%= @company.phone_number %>
-</p>
+  <tr>
+    <td class="bold">Phone:</td>
+    <td><%= @company.phone_number %></td>
+  </tr>
 
-<p>
-  <b>Fax number:</b>
-  <%= @company.fax_number %>
-</p>
+  <tr>
+    <td class="bold">Fax number:</td>
+    <td><%= @company.fax_number %></td>
+  </tr>
 
-<p>
-  <b>Address:</b>
-  <%= @company.address %>
-</p>
+  <tr>
+    <td class="bold">Address:</td>
+    <td><%= link_to "Address details", @company.address %></td>
+  </tr>
+</table>
 
-
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to 'Edit', edit_company_path(@company), class: "tiny button radius" %>
+<%= link_to 'Back', companies_path, class: "tiny button radius" %>

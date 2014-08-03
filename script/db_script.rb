@@ -140,19 +140,19 @@ ActiveRecord::Base.transaction do
     #updated_at) VALUES #{team_members_inserts.join(", ")}"
 
     profile_ids = TeamMember.pluck(:id)
+    used_comp_ids = Person.pluck(:company_id)
+    comp_ids = Company.pluck(:id)
+    company_ids = []
+    comp_ids.each do |not_used|
+      company_ids << not_used unless used_comp_ids.include?(not_used)
+    end
+
     CSV.foreach("script/team_members.csv") do  |row|
       fns = row[0].strip
       lns = row[1]
       phone_number = row[2]
       email = row[3]
-      used_comp_ids = Person.pluck(:company_id)
-      comp_ids = Company.pluck(:id)
-      company_ids = []
-      comp_ids.each do |not_used|
-        company_ids << not_used unless used_comp_ids.include?(not_used)
-      end
-
-      company_id = company_ids.pop
+      company_id = company_ids[rand(0..(company_ids.size-1))]
       profile_id = profile_ids.pop
 
       people_t_inserts << "('#{fns}', '#{lns}', '#{phone_number}', '#{email}', #{company_id}, #{profile_id}, 'TeamMember', now(), now())"
@@ -215,16 +215,16 @@ ActiveRecord::Base.transaction do
 
   CSV.foreach("script/documents.csv") do  |row|
     proj_id =  project_ids[rand(0..(project_ids.size-1))]
-    type = row[0].strip
+    doc_type = row[0].strip
     revision_number = row[1]
 
-    docs_inserts << "(#{proj_id}, '#{type}', '#{revision_number}', now(), now())"
+    docs_inserts << "(#{proj_id}, '#{doc_type}', '#{revision_number}', now(), now())"
   end
 
   unless docs_inserts.empty?
-    ActiveRecord::Base.connection.execute("INSERT INTO documents (project_id, type, revision_number,\
+    ActiveRecord::Base.connection.execute("INSERT INTO documents (project_id, doc_type, revision_number,\
 		created_at, updated_at) VALUES #{docs_inserts.join(", ")}")
-    #print "INSERT INTO documents (project_id, type, revision_number, created_at, updated_at) VALUES #{docs_inserts.join(", ")}"
+    #print "INSERT INTO documents (project_id, doc_type, revision_number, created_at, updated_at) VALUES #{docs_inserts.join(", ")}"
   end
 
   puts "________________________________________________________________________"
@@ -257,7 +257,7 @@ end
 
 ActiveRecord::Base.transaction do
   #assign team members to every project
-  project_teammembers_inserts = []
+  projects_teammembers_inserts = []
 
   num_of_tms = TeamMember.all.size
   projs = Project.pluck(:id)
@@ -269,13 +269,13 @@ ActiveRecord::Base.transaction do
   puts "_________________________#{num_of_team_members["#{budget}"]}"
     (num_of_team_members["#{budget}"] || 1).times do
       team_member_id = TeamMember.find(rand(1..(num_of_tms-1))).id
-      project_teammembers_inserts << "(#{pr_id}, #{team_member_id}, now(), now())"
+      projects_teammembers_inserts << "(#{pr_id}, #{team_member_id})"
     end
   end
 
-  ActiveRecord::Base.connection.execute("INSERT INTO project_team_members (project_id, team_member_id,\
-		created_at, updated_at) VALUES #{project_teammembers_inserts.join(", ")}")
-  #print "INSERT INTO project_team_members (project_id, team_member_id, created_at, updated_at) VALUES #{l_contract_inserts.join(", ")}"
+  ActiveRecord::Base.connection.execute("INSERT INTO projects_team_members (project_id, team_member_id)\
+ VALUES #{projects_teammembers_inserts.join(", ")}")
+  #print "INSERT INTO projects_team_members (project_id, team_member_id) VALUES #{projects_team_members.join(", ")}"
   puts "________________________________________________________________________"
   puts "done"
 end

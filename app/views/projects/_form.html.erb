@@ -11,23 +11,47 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :client %><br />
-    <%= f.text_field :client %>
-  </div>
-  <div class="field">
-    <%= f.label :budget %><br />
-    <%= f.text_field :budget %>
-  </div>
-  <div class="field">
-    <%= f.label :delivery_deadline %><br />
-    <%= f.date_select :delivery_deadline %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :client, class: "right inline"  %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.collection_select(:client_id, Client.all, :id, :person_name, {include_blank: true, :data => {:placeholder => "Select client"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", }) %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= link_to "New Client", new_client_path, class: "tiny button radius" %>
+        <%= link_to "New Company", new_company_path, class: "tiny button radius" %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :budget, class: "right inline"  %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :budget %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :delivery_deadline, class: "right inline"  %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :delivery_deadline %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :status, class: "right inline"  %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :status %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= f.submit %>
+      </div>
+    </div>
 <% end %>

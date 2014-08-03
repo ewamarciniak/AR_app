@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20140731142853) do
 
   create_table "documents", :force => true do |t|
     t.integer  "project_id"
-    t.string   "type"
+    t.string   "doc_type"
     t.integer  "revision_number"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
@@ -77,16 +77,6 @@ ActiveRecord::Schema.define(:version => 20140731142853) do
 
   add_index "people", ["company_id"], :name => "index_people_on_company_id"
 
-  create_table "project_team_members", :id => false, :force => true do |t|
-    t.integer  "project_id"
-    t.integer  "team_member_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "project_team_members", ["project_id"], :name => "index_project_team_members_on_project_id"
-  add_index "project_team_members", ["team_member_id"], :name => "index_project_team_members_on_team_member_id"
-
   create_table "projects", :force => true do |t|
     t.integer  "client_id"
     t.float    "budget"
@@ -97,6 +87,14 @@ ActiveRecord::Schema.define(:version => 20140731142853) do
   end
 
   add_index "projects", ["client_id"], :name => "index_projects_on_client_id"
+
+  create_table "projects_team_members", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "team_member_id"
+  end
+
+  add_index "projects_team_members", ["project_id"], :name => "index_projects_team_members_on_project_id"
+  add_index "projects_team_members", ["team_member_id"], :name => "index_projects_team_members_on_team_member_id"
 
   create_table "team_members", :force => true do |t|
     t.string   "team"

@@ -12,7 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require foundation
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(function (){
+    $('#legal_contract_signed_on, ##legal_contract_revised_on, #project_delivery_deadline').datepicker({dateFormat: 'yy-mm-dd'});
+});

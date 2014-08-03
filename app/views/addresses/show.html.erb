@@ -1,30 +1,32 @@
+<h1>Address details</h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Line1:</b>
-  <%= @address.line1 %>
-</p>
+<table>
+  <tr>
+    <td class="bold">Line1:</td>
+    <td><%= @address.line1 %></td>
+  </tr>
 
-<p>
-  <b>Line2:</b>
-  <%= @address.line2 %>
-</p>
+  <tr>
+    <td class="bold">Line2:</td>
+    <td><%= @address.line2 %></td>
+  </tr>
 
-<p>
-  <b>Postcode:</b>
-  <%= @address.postcode %>
-</p>
+  <tr>
+    <td class="bold">Postcode:</td>
+    <td><%= @address.postcode %></td>
+  </tr>
 
-<p>
-  <b>City:</b>
-  <%= @address.city %>
-</p>
+  <tr>
+    <td class="bold">City:</td>
+    <td><%= @address.city %></td>
+  </tr>
 
-<p>
-  <b>County:</b>
-  <%= @address.county %>
-</p>
+  <tr>
+    <td class="bold">County:</td>
+    <td><%= @address.county %></td>
+  </tr>
+</table>
 
-
-<%= link_to 'Edit', edit_address_path(@address) %> |
-<%= link_to 'Back', addresses_path %>
+<%= link_to 'Edit', edit_address_path(@address), class: "tiny button radius"  %>
+<%= link_to 'Back', addresses_path, class: "tiny button radius"  %>

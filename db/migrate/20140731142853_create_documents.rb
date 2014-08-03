@@ -2,7 +2,7 @@ class CreateDocuments < ActiveRecord::Migration
   def change
     create_table :documents do |t|
       t.references :project
-      t.string :type
+      t.string :doc_type
       t.integer :revision_number
 
       t.timestamps

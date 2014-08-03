@@ -2,7 +2,11 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:team_member_id]
+      @projects = TeamMember.find(params[:team_member_id]).projects
+    else
+      @projects = Project.find(:all)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +84,5 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
