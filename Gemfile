@@ -9,6 +9,10 @@ gem 'pg'
 gem 'foundation-rails'
 gem 'debugger'
 gem 'activerecord-import'
+gem 'jquery-ui-rails'
+gem 'jquery-rails'
+gem 'ruby-prof', group: :test
+gem 'test-unit', group: :test
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,11 +25,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-ui-rails'
-gem 'jquery-rails'
-gem 'ruby-prof', group: :test
-gem 'test-unit', group: :test
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

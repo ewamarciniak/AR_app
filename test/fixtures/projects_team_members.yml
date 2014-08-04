@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  project: 
-  team_member: 
+  project: 1
+  team_member: 1
 
 two:
-  project: 
-  team_member: 
+  project: 1
+  team_member: 2
