@@ -198,14 +198,14 @@ ActiveRecord::Base.transaction do
   puts "________________________________________________________________________"
   puts "projects done"
 end
-##project_team_members
-#project_team_member_inserts=[]
+##projects_team_members
+#projects_team_member_inserts=[]
 #proj_ids = Project.pluck(:id)
 #tm_ids = TeamMember.pluck(:id)
 #
 #tm_ids.each do |tm_id|
 #	proj_id =  proj_ids[rand(0..(proj_ids.size-1))]
-#	project_team_member_inserts << "(#{proj_id}, #{tm_id}, now(), now()"
+#	projects_team_member_inserts << "(#{proj_id}, #{tm_id}, now(), now()"
 #end
 
 ActiveRecord::Base.transaction do

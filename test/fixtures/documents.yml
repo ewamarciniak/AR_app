@@ -2,10 +2,10 @@
 
 one:
   project: 
-  type: 
+  doc_type:
   revision_number: 1
 
 two:
   project: 
-  type: 
+  doc_type:
   revision_number: 1
