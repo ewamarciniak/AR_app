@@ -1,4 +1,4 @@
 class LegalContract < ActiveRecord::Base
   belongs_to :project
-  attr_accessible :copy_stored, :revised_on, :signed_on
+  attr_accessible :copy_stored, :revised_on, :signed_on, :title, :project_id
 end

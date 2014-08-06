@@ -216,15 +216,17 @@ ActiveRecord::Base.transaction do
   CSV.foreach("script/documents.csv") do  |row|
     proj_id =  project_ids[rand(0..(project_ids.size-1))]
     doc_type = row[0].strip
-    revision_number = row[1]
+    doc_name = row[1]
+    revision_number = row[2]
+    revision_date = row[3]
 
-    docs_inserts << "(#{proj_id}, '#{doc_type}', '#{revision_number}', now(), now())"
+    docs_inserts << "(#{proj_id}, '#{doc_type}', '#{doc_name}', '#{revision_number}', '#{revision_date}', now(), now())"
   end
 
   unless docs_inserts.empty?
-    ActiveRecord::Base.connection.execute("INSERT INTO documents (project_id, doc_type, revision_number,\
-		created_at, updated_at) VALUES #{docs_inserts.join(", ")}")
-    #print "INSERT INTO documents (project_id, doc_type, revision_number, created_at, updated_at) VALUES #{docs_inserts.join(", ")}"
+    ActiveRecord::Base.connection.execute("INSERT INTO documents (project_id, doc_type, doc_name, revision_number,\
+		revision_date, created_at, updated_at) VALUES #{docs_inserts.join(", ")}")
+    #print "INSERT INTO documents (project_id, doc_type, doc_name, revision_number, revision_date, created_at, updated_at) VALUES #{docs_inserts.join(", ")}"
   end
 
   puts "________________________________________________________________________"
@@ -241,14 +243,15 @@ ActiveRecord::Base.transaction do
     revised_on = row[1]
     copy_stored = row[2]
     project_id = project_ids.pop
+    title = row[3]
 
-    l_contract_inserts << "(#{project_id}, '#{signed_on}', '#{revised_on}', '#{copy_stored}', now(), now())"
+    l_contract_inserts << "(#{project_id}, '#{title}', '#{signed_on}', '#{revised_on}', '#{copy_stored}', now(), now())"
   end
 
   unless l_contract_inserts.empty?
-    ActiveRecord::Base.connection.execute("INSERT INTO legal_contracts (project_id, signed_on, revised_on, copy_stored,\
+    ActiveRecord::Base.connection.execute("INSERT INTO legal_contracts (project_id, title, signed_on, revised_on, copy_stored,\
 		created_at, updated_at) VALUES #{l_contract_inserts.join(", ")}")
-    #print "INSERT INTO legal_contracts (project_id, signed_on, revised_on, copy_stored, created_at, updated_at) VALUES #{l_contract_inserts.join(", ")}"
+    #print "INSERT INTO legal_contracts (project_id, title, signed_on, revised_on, copy_stored, created_at, updated_at) VALUES #{l_contract_inserts.join(", ")}"
   end
 
   puts "________________________________________________________________________"

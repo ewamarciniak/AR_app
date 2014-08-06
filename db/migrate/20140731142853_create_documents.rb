@@ -3,7 +3,9 @@ class CreateDocuments < ActiveRecord::Migration
     create_table :documents do |t|
       t.references :project
       t.string :doc_type
+      t.string :doc_name
       t.integer :revision_number
+      t.date :revision_date
 
       t.timestamps
     end

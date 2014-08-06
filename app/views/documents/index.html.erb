@@ -4,6 +4,7 @@
   <tr>
     <th>Project</th>
     <th>Document type</th>
+    <th>Document name</th>
     <th>Revision number</th>
     <th></th>
     <th></th>
@@ -14,7 +15,9 @@
   <tr>
     <td><%= link_to 'Project details', document.project %></td>
     <td><%= document.doc_type %></td>
+    <td><%= document.doc_name %></td>
     <td><%= document.revision_number %></td>
+    <td><%= document.revision_date %></td>
     <td><%= link_to 'Show', document %></td>
     <td><%= link_to 'Edit', edit_document_path(document) %></td>
     <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>

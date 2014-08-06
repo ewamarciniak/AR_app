@@ -1,4 +1,4 @@
 class Document < ActiveRecord::Base
   belongs_to :project
-  attr_accessible :revision_number, :doc_type
+  attr_accessible :revision_number, :doc_type, :doc_name, :revision_date, :project_id
 end

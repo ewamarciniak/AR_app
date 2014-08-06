@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Project</th>
+    <th>Title</th>
     <th>Signed on</th>
     <th>Revised on</th>
     <th>Copy stored</th>
@@ -14,6 +15,7 @@
 <% @legal_contracts.each do |legal_contract| %>
   <tr>
     <td><%= link_to 'Project details', legal_contract.project %></td>
+    <td><%= legal_contract.title %></td>
     <td><%= legal_contract.signed_on %></td>
     <td><%= legal_contract.revised_on %></td>
     <td><%= legal_contract.copy_stored %></td>

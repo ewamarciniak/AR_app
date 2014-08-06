@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  project: 
+  project:
+  title: MyString
   signed_on: 2014-07-31
   revised_on: 2014-07-31
   copy_stored: MyString
 
 two:
-  project: 
+  project:
+  title: MyString
   signed_on: 2014-07-31
   revised_on: 2014-07-31
   copy_stored: MyString

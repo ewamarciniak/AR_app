@@ -3,9 +3,13 @@
 one:
   project: 
   doc_type:
+  doc_name:
   revision_number: 1
+  revision_date:
 
 two:
   project: 
   doc_type:
+  doc_name:
   revision_number: 1
+  revision_date:

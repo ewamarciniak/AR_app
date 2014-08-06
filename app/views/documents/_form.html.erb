@@ -29,10 +29,26 @@
     </div>
     <div class="row collapse">
       <div class="small-3 columns">
+        <%= f.label :doc_name, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :doc_name, :placeholder => "(optional)" %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
         <%= f.label :revision_number, class: "right inline" %>
       </div>
       <div class="small-7 columns left">
         <%= f.number_field :revision_number, :placeholder => "(optional)" %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :rev_date, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :rev_date %>
       </div>
     </div>
     <div class="row collapse">
