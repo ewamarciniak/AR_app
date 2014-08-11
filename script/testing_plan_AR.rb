@@ -22,7 +22,7 @@ end
 
 # Establish connection to the DB based on the 'development'.
 ActiveRecord::Base.establish_connection(db_config["database"])
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+#ActiveRecord::Base.logger = Logger.new(STDOUT)
 #TRAVERSALS
 
 #T1: Raw traversal speed************************************************************************************************
@@ -147,11 +147,12 @@ end
 #Generate 10 random Document ids; for each generated lookup the document with that id. Return the number of documents
 #processed when done.
 def query_1
-  document_ids = Document.pluck(:id)
+
+  document_ids = Document.all.map(&:id)
+  index_num = [ 342, 876, 44, 299, 908, 112, 4, 77, 643, 999]
 
   all_ids = []
-  10.times do
-    num = rand(0..(document_ids.size-1))
+  index_num.each do |num|
     all_ids << document_ids[num]
   end
 
@@ -168,31 +169,29 @@ end
 #Choose a range for dates that will contain the last 1% of the dates found in the database's Documents. Retrieve the
 #Documents that satisfy this range predicate.
 def query_2
-  documents = Document.all(:conditions =>
-                               ["revision_date > :start_date AND revision_date <= :end_date", {
-                                   :start_date => '2014-03-29', :end_date => '2014-08-05' }])
+  start_date = '2014-03-29'.to_date
+  end_date = '2014-08-05'.to_date
+  documents = Document.select { |document| document.revision_date > start_date && document.revision_date < end_date}
+
   return documents.size
 end
 
 #Query Q3***************************************************************************************************************
 #Choose a range for dates that will contain the last 10% of the dates found in the database's Documents. Retrieve the
 # Documents that satisfy this range predicate.
-
-
 def query_3
-  documents = Document.all(:conditions =>
-                 ["revision_date >= :start_date AND revision_date <= :end_date", {
-                     :start_date => '2014-01-10', :end_date => '2014-01-20' }])
+  start_date = '2014-01-10'.to_date
+  end_date = '2014-01-20'.to_date
+  documents = Document.select { |document| document.revision_date > start_date && document.revision_date < end_date}
   return documents.size
 end
 
 #Query Q4: path lookup**************************************************************************************************
 #Generate 100 random legal_contract titles. For each title generated, find all TeamMembers that use the project
 #corresponding to the legal_contract. Also, count the total number of team_members that qualify.
-
 def query_4
   team_members_num = 0
-  contracts = LegalContract.find(:all)
+  contracts = LegalContract.all
   contracts.each do |contract|
     projects_team_members = contract.project.team_members.find(:all)
     team_members_num += projects_team_members.size
@@ -226,7 +225,8 @@ def query_7
   documents.each do |doc|
     document_ids << doc.id
   end
-  return document_ids.join(', ')
+  #puts document_ids.join(', ')
+  return document_ids.size
 
 end
 
@@ -235,8 +235,16 @@ end
 #legal_contract. Also, return a count of the number of such pairs encountered.
 
 def query_8
-  #join???
-  #Project.includes(:legal_contract, :document)
+  contracts = LegalContract.find(:all)
+  documents = Document.find(:all)
+  all_relevant_docs = []
+  all_relevant_docs_count = 0
+  contracts.each do |contract|
+    pairs = Document.select {|doc| doc.contract_id == contract.id.to_s }
+    all_relevant_docs  << pairs
+    all_relevant_docs_count += pairs.to_a.count
+  end
+  return all_relevant_docs_count
 end
 #STRUCTURAL MODIFICATIONS
 
@@ -293,14 +301,37 @@ def modification_2_deletion
  return "deleted"
 end
 
-puts traversal_1
-puts traversal_2a
-puts traversal_2b
-puts traversal_2c
-puts query_1
-puts query_2
-puts query_3
-puts query_4
-puts query_5
-puts query_7
-puts modification_2_deletion
+#puts traversal_1
+#puts traversal_1
+#puts traversal_2a
+#puts traversal_2b
+#puts traversal_2c
+Benchmark.bm do |x|
+  x.report("ActiveRecord#query_1 \n") do
+    query_1
+  end
+  x.report("ActiveRecord#query_2 \n") do
+    query_2
+  end
+  x.report("ActiveRecord#query_3 \n") do
+    query_3
+  end
+  x.report("ActiveRecord#query_4 \n") do
+    query_4
+  end
+  x.report("ActiveRecord#query_5 \n") do
+    query_5
+  end
+  x.report("ActiveRecord#query_7 \n") do
+    query_7
+  end
+  x.report("ActiveRecord#query_8 \n") do
+    query_8
+  end
+  x.report("ActiveRecord#modification_insert \n") do
+    modification_1_insert
+  end
+  x.report("ActiveRecord#modification_deletion \n") do
+    modification_2_deletion
+  end
+end

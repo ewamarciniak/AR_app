@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20140731142853) do
 
   create_table "documents", :force => true do |t|
     t.integer  "project_id"
+    t.string   "contract_id"
     t.string   "doc_type"
     t.string   "doc_name"
     t.integer  "revision_number"
