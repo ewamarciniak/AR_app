@@ -30,8 +30,10 @@ ActiveRecord::Base.establish_connection(db_config["database"])
 # project is visited, perform a depth first search on its graph of documents. Return a count of the number of documents
 # visited when done./NO DEPTH FIRST SEARCH
 def traversal_1
+
   all_people = Person.where(:profile_type => "TeamMember")
   docs = 0
+  puts all_people.size
   all_people.each do |person|
     team_member = TeamMember.find(person.profile_id)
     team_member.projects.each do |project|
@@ -42,9 +44,7 @@ def traversal_1
       end
     end
   end
-
   return docs
-  #might have to return
 end
 
 #Traversal T2: Traversal with updates***********************************************************************************
@@ -307,31 +307,44 @@ end
 #puts traversal_2b
 #puts traversal_2c
 Benchmark.bm do |x|
-  x.report("ActiveRecord#query_1 \n") do
-    query_1
+  x.report("DataMapper#traversal_1 \n") do
+    puts traversal_1
   end
-  x.report("ActiveRecord#query_2 \n") do
+  x.report("DataMapper#traversal_2a \n") do
+    puts traversal_2a
+  end
+  x.report("DataMapper#traversal_2b \n") do
+    puts traversal_2b
+  end
+  x.report("DataMapper#traversal_2c \n") do
+    puts traversal_2c
+  end
+  x.report("DataMapper#query_1 \n") do
+    puts query_1
+  end
+  x.report("DataMapper#query_2 \n") do
     query_2
   end
-  x.report("ActiveRecord#query_3 \n") do
+  x.report("DataMapper#query_3 \n") do
     query_3
   end
-  x.report("ActiveRecord#query_4 \n") do
+  x.report("DataMapper#query_4 \n") do
     query_4
   end
-  x.report("ActiveRecord#query_5 \n") do
+  x.report("DataMapper#query_5 \n") do
     query_5
   end
-  x.report("ActiveRecord#query_7 \n") do
+  x.report("DataMapper#query_7 \n") do
     query_7
   end
-  x.report("ActiveRecord#query_8 \n") do
+  x.report("DataMapper#query_8 \n") do
     query_8
   end
-  x.report("ActiveRecord#modification_insert \n") do
+  x.report("DataMapper#modification_insert \n") do
     modification_1_insert
   end
-  x.report("ActiveRecord#modification_deletion \n") do
+  x.report("DataMapper#modification_deletion \n") do
     modification_2_deletion
   end
+
 end

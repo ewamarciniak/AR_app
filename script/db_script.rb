@@ -268,9 +268,17 @@ ActiveRecord::Base.transaction do
                   28, 23, 140, 141, 59, 196, 25, 152, 18, 191, 195, 190, 151, 118, 172, 173, 132, 88, 143, 82, 51, 75, 142, 55, 62, 136, 145, 117, 114, 170, 66,
                   59, 164, 23, 49, 86, 51, 190, 3, 6, 191, 115, 88, 169, 161, 69, 104, 35]
   indexes = [10, 22, 34, 67, 43, 0, 20, 11, 54, 27]
-  legal_contract_ids = LegalContract.pluck(:id)
+  legal_contract_ids = []
+  legal_contracts = LegalContract.all.sort
+  legal_contracts.each do |contract|
+    legal_contract_ids << contract.id
+  end
   docs_inserts = []
-  project_ids = Project.pluck(:id)
+  project_ids = []
+  projects = Project.all.sort
+  projects.each do |project|
+    project_ids << project.id
+  end
   index_num = 0
   CSV.foreach("script/documents.csv") do  |row|
 
@@ -304,16 +312,22 @@ ActiveRecord::Base.transaction do
   #assign team members to every project
   projects_teammembers_inserts = []
 
-  num_of_tms = TeamMember.all.size
+  team_member_ids =[]
+
   projs = Project.pluck(:id)
+  num_of_team_members = {"400000" => 1, "500000" => 2, "600000" => 3, "700000" => 4, "800000" => 4, "900000" => 4,
+                         "1000000" => 5, "2000000" => 7, "3000000" => 9}
   projs.each do |pr_id|
-    num_of_team_members = {"400000" => 1, "500000" => 2, "600000" => 3, "700000" => 4, "800000" => 4, "900000" => 4,
-                           "1000000" => 5, "2000000" => 7, "3000000" => 9}
-    budget = Project.find(pr_id).budget.to_i
-    budget = budget.to_s
-  puts "_________________________#{num_of_team_members["#{budget}"]}"
+    budget = Project.find(pr_id).budget.to_i.to_s
+    puts "_________________________#{num_of_team_members["#{budget}"]}"
     (num_of_team_members["#{budget}"] || 1).times do
-      team_member_id = TeamMember.find(rand(1..(num_of_tms-1))).id
+      if team_member_ids.empty?
+        team_members = TeamMember.find(:all).sort
+        team_members.each do |tm|
+          team_member_ids << tm.id
+        end
+      end
+      team_member_id = team_member_ids.pop
       projects_teammembers_inserts << "(#{pr_id}, #{team_member_id})"
     end
   end
