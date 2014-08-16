@@ -149,7 +149,8 @@ end
 def query_1
 
   document_ids = Document.all.map(&:id)
-  index_num = [ 342, 876, 44, 299, 908, 112, 4, 77, 643, 999]
+  #index_num = [ 342, 876, 44, 299, 908, 112, 4, 77, 643, 999]
+  index_num = [ 42, 76, 44, 90, 8, 12, 4, 77, 43, 99]
 
   all_ids = []
   index_num.each do |num|
@@ -301,50 +302,53 @@ def modification_2_deletion
  return "deleted"
 end
 
+def test_homepage
+  get '/'
+end
+
 #puts traversal_1
 #puts traversal_1
 #puts traversal_2a
 #puts traversal_2b
 #puts traversal_2c
 Benchmark.bm do |x|
-  x.report("DataMapper#traversal_1 \n") do
+  x.report("ActiveRecord#traversal_1 \n") do
     puts traversal_1
   end
-  x.report("DataMapper#traversal_2a \n") do
+  x.report("ActiveRecord#traversal_2a \n") do
     puts traversal_2a
   end
-  x.report("DataMapper#traversal_2b \n") do
+  x.report("ActiveRecord#traversal_2b \n") do
     puts traversal_2b
   end
-  x.report("DataMapper#traversal_2c \n") do
+  x.report("ActiveRecord#traversal_2c \n") do
     puts traversal_2c
   end
-  x.report("DataMapper#query_1 \n") do
+  x.report("ActiveRecord#query_1 \n") do
     puts query_1
   end
-  x.report("DataMapper#query_2 \n") do
-    query_2
+  x.report("ActiveRecord#query_2 \n") do
+    puts query_2
   end
-  x.report("DataMapper#query_3 \n") do
-    query_3
+  x.report("ActiveRecord#query_3 \n") do
+    puts query_3
   end
-  x.report("DataMapper#query_4 \n") do
-    query_4
+  x.report("ActiveRecord#query_4 \n") do
+    puts query_4
   end
-  x.report("DataMapper#query_5 \n") do
-    query_5
+  x.report("ActiveRecord#query_5 \n") do
+    puts query_5
   end
-  x.report("DataMapper#query_7 \n") do
-    query_7
+  x.report("ActiveRecord#query_7 \n") do
+    puts query_7
   end
-  x.report("DataMapper#query_8 \n") do
-    query_8
+  x.report("ActiveRecord#query_8 \n") do
+    puts query_8
   end
-  x.report("DataMapper#modification_insert \n") do
+  x.report("ActiveRecord#modification_insert \n") do
     modification_1_insert
   end
-  x.report("DataMapper#modification_deletion \n") do
+  x.report("ActiveRecord#modification_deletion \n") do
     modification_2_deletion
   end
-
 end
