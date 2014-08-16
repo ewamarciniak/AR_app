@@ -129,17 +129,36 @@ end
 #Repeat Traversal T2, except that now the update is on the date field, which is indexed. The specific update is to
 # increment the date if it is odd, and decrement the date if it is even.
 
+
+
 #Traversal T6: Sparse traversal speed***********************************************************************************
 #Traverse the person hierarchy. As each team member is visited, visit each of its referenced unshared projects. As each
 # project is visited, visit the root document Return a count of the number of documents visited when done.
 
+
 #Traversals T8 and T9: Operations on Manual.
 #Traversal T8***********************************************************************************************************
 #Scans the address object, counting the number of occurrences of the character “I.”
+def traversal_8
+  num_occurances = 0
+  Address.all.each do |address|
+   full_ad = address.line1 + ' '  + (address.line2 || '') + ' '  + address.city + address.county
+   occurance = full_ad.downcase.scan(/i/).size
+   num_occurances += occurance
+  end
+  return num_occurances
+end
 
 #Traversal T9***********************************************************************************************************
 #Checks to see if the first and last character in the address object are the same.
-
+def traversal_9
+  num_occurances = 0
+  Address.all.each do |address|
+    require 'debugger'
+    num_occurances += 1 if address.city.downcase.split('').first == address.city.downcase.split('').last
+  end
+  return num_occurances
+end
 
 #QUERIES
 
@@ -306,49 +325,12 @@ def test_homepage
   get '/'
 end
 
-#puts traversal_1
-#puts traversal_1
-#puts traversal_2a
-#puts traversal_2b
-#puts traversal_2c
+
 Benchmark.bm do |x|
-  x.report("ActiveRecord#traversal_1 \n") do
-    puts traversal_1
+  x.report("ActiveRecord#traversal_8 \n") do
+    puts traversal_8
   end
-  x.report("ActiveRecord#traversal_2a \n") do
-    puts traversal_2a
-  end
-  x.report("ActiveRecord#traversal_2b \n") do
-    puts traversal_2b
-  end
-  x.report("ActiveRecord#traversal_2c \n") do
-    puts traversal_2c
-  end
-  x.report("ActiveRecord#query_1 \n") do
-    puts query_1
-  end
-  x.report("ActiveRecord#query_2 \n") do
-    puts query_2
-  end
-  x.report("ActiveRecord#query_3 \n") do
-    puts query_3
-  end
-  x.report("ActiveRecord#query_4 \n") do
-    puts query_4
-  end
-  x.report("ActiveRecord#query_5 \n") do
-    puts query_5
-  end
-  x.report("ActiveRecord#query_7 \n") do
-    puts query_7
-  end
-  x.report("ActiveRecord#query_8 \n") do
-    puts query_8
-  end
-  x.report("ActiveRecord#modification_insert \n") do
-    modification_1_insert
-  end
-  x.report("ActiveRecord#modification_deletion \n") do
-    modification_2_deletion
+  x.report("ActiveRecord#traversal_9 \n") do
+    puts traversal_9
   end
 end
