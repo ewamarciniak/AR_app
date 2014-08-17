@@ -128,8 +128,30 @@ end
 #Traversal T3: Traversal with indexed field updates*********************************************************************
 #Repeat Traversal T2, except that now the update is on the date field, which is indexed. The specific update is to
 # increment the date if it is odd, and decrement the date if it is even.
+def traversal_3
+  all_people = Person.where(:profile_type => "TeamMember")
+  docs = 0
+  all_people.each do |person|
+    team_member = TeamMember.find(person.profile_id)
+    team_member.projects.each do |project|
+      documents = Document.where(:project_id => project.id)
+      documents.each do |doc|
+        #visiting instead of returning the size
+        docs+=1
 
+        day = doc.revision_date.mday
+        if day.odd?
+          doc.revision_date += 1
+        elsif day.even?
+          doc.revision_date -= 1
+        end
+        doc.save!
+      end
+    end
+  end
+  return docs
 
+end
 
 #Traversal T6: Sparse traversal speed***********************************************************************************
 #Traverse the person hierarchy. As each team member is visited, visit each of its referenced unshared projects. As each
@@ -321,16 +343,54 @@ def modification_2_deletion
  return "deleted"
 end
 
-def test_homepage
-  get '/'
-end
-
-
 Benchmark.bm do |x|
+  x.report("ActiveRecord#traversal_1 \n") do
+    puts traversal_1
+  end
+  x.report("ActiveRecord#traversal_2a \n") do
+    puts traversal_2a
+  end
+  x.report("ActiveRecord#traversal_2b \n") do
+    puts traversal_2b
+  end
+  x.report("ActiveRecord#traversal_2c \n") do
+    puts traversal_2c
+  end
+  x.report("ActiveRecord#traversal_3 \n") do
+    puts traversal_3
+  end
   x.report("ActiveRecord#traversal_8 \n") do
     puts traversal_8
   end
   x.report("ActiveRecord#traversal_9 \n") do
     puts traversal_9
   end
+  x.report("ActiveRecord#query_1 \n") do
+    puts query_1
+  end
+  x.report("ActiveRecord#query_2 \n") do
+    puts query_2
+  end
+  x.report("ActiveRecord#query_3 \n") do
+    puts query_3
+  end
+  x.report("ActiveRecord#query_4 \n") do
+    puts query_4
+  end
+  x.report("ActiveRecord#query_5 \n") do
+    puts query_5
+  end
+  x.report("ActiveRecord#query_7 \n") do
+    puts query_7
+  end
+  x.report("ActiveRecord#query_8 \n") do
+    puts query_8
+  end
+  x.report("ActiveRecord#modification_insert \n") do
+    modification_1_insert
+  end
+  x.report("ActiveRecord#modification_deletion \n") do
+    modification_2_deletion
+  end
+
 end

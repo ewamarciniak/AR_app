@@ -11,7 +11,6 @@ gem 'debugger'
 gem 'activerecord-import'
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
-gem 'rails-perftest'
 gem 'ruby-prof', group: :test
 gem 'test-unit', group: :test
 
