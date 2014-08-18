@@ -29,23 +29,6 @@ ActiveRecord::Base.establish_connection(db_config["database"])
 #Traverse the Person hierarchy. As each team_member is visited, visit each of its referenced unshared Projects. As each
 # project is visited, perform a depth first search on its graph of documents. Return a count of the number of documents
 # visited when done./NO DEPTH FIRST SEARCH
-def traversal_1
-
-  all_people = Person.where(:profile_type => "TeamMember")
-  docs = 0
-  puts all_people.size
-  all_people.each do |person|
-    team_member = TeamMember.find(person.profile_id)
-    team_member.projects.each do |project|
-      documents = Document.where(:project_id => project.id)
-      documents.each do |doc|
-        #visiting instead of returning the size
-        docs += 1
-      end
-    end
-  end
-  return docs
-end
 
 #Traversal T2: Traversal with updates***********************************************************************************
 #Repeat Traversal T1, but update objects during the traversal. There are three types of update patterns in this
@@ -156,7 +139,22 @@ end
 #Traversal T6: Sparse traversal speed***********************************************************************************
 #Traverse the person hierarchy. As each team member is visited, visit each of its referenced unshared projects. As each
 # project is visited, visit the root document Return a count of the number of documents visited when done.
+def traversal_6
 
+  all_people = Person.where(:profile_type => "TeamMember")
+  docs = 0
+  all_people.each do |person|
+    team_member = TeamMember.find(person.profile_id)
+    team_member.projects.uniq.each do |project|
+      documents = Document.where(:project_id => project.id)
+      documents.each do |doc|
+        #visiting instead of returning the size
+        docs += 1
+      end
+    end
+  end
+  return docs
+end
 
 #Traversals T8 and T9: Operations on Manual.
 #Traversal T8***********************************************************************************************************
@@ -344,9 +342,6 @@ def modification_2_deletion
 end
 
 Benchmark.bm do |x|
-  x.report("ActiveRecord#traversal_1 \n") do
-    puts traversal_1
-  end
   x.report("ActiveRecord#traversal_2a \n") do
     puts traversal_2a
   end
@@ -358,6 +353,9 @@ Benchmark.bm do |x|
   end
   x.report("ActiveRecord#traversal_3 \n") do
     puts traversal_3
+  end
+  x.report("ActiveRecord#traversal_6 \n") do
+    puts traversal_6
   end
   x.report("ActiveRecord#traversal_8 \n") do
     puts traversal_8
