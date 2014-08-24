@@ -186,16 +186,13 @@ end
 #Generate 10 random Document ids; for each generated lookup the document with that id. Return the number of documents
 #processed when done.
 def query_1
-
-  document_ids = Document.all.map(&:id)
+  document_ids = Document.pluck(:id)
   #index_num = [ 342, 876, 44, 299, 908, 112, 4, 77, 643, 999]
   index_num = [ 42, 76, 44, 90, 8, 12, 4, 77, 43, 99]
-
   all_ids = []
   index_num.each do |num|
     all_ids << document_ids[num]
   end
-
   processed_number = 0
   all_ids.each do |id|
     Document.find(id)
@@ -209,9 +206,9 @@ end
 #Choose a range for dates that will contain the last 1% of the dates found in the database's Documents. Retrieve the
 #Documents that satisfy this range predicate.
 def query_2
-  start_date = '2014-03-29'.to_date
+  start_date = '2014-03-30'.to_date
   end_date = '2014-08-05'.to_date
-  documents = Document.select { |document| document.revision_date > start_date && document.revision_date < end_date}
+  documents = Document.where( :revision_date => (start_date..end_date))
 
   return documents.size
 end
@@ -221,8 +218,8 @@ end
 # Documents that satisfy this range predicate.
 def query_3
   start_date = '2014-01-10'.to_date
-  end_date = '2014-01-20'.to_date
-  documents = Document.select { |document| document.revision_date > start_date && document.revision_date < end_date}
+  end_date = '2014-01-18'.to_date
+  documents = Document.where( :revision_date => (start_date..end_date))
   return documents.size
 end
 
@@ -230,9 +227,20 @@ end
 #Generate 100 random legal_contract titles. For each title generated, find all TeamMembers that use the project
 #corresponding to the legal_contract. Also, count the total number of team_members that qualify.
 def query_4
+  all_contracts = LegalContract.all.sort
+  indexes = [0,18,2,4,1,15,3,17,16,19]
+  contracts =[]
+  10.times do
+    contracts << all_contracts[indexes.pop].id
+  end
+
+  team_members = TeamMember.joins(:projects => :legal_contract).where(legal_contracts: { id: contracts })
+  return team_members.size
+end
+
+def query_4a
   team_members_num = 0
-  contracts = LegalContract.all
-  contracts.each do |contract|
+  LegalContract.find_each do |contract|
     projects_team_members = contract.project.team_members.find(:all)
     team_members_num += projects_team_members.size
   end
@@ -243,31 +251,16 @@ end
 #Find all Team_members that use a project with a build date later than the build date of the team_member. Also, report
 #the number of qualifying team_members found.
 def query_5
-  relevant_team_members = []
-  all_projects = Project.find(:all)
-  all_projects.each do |proj|
-    proj_date = proj.created_at
-    proj.team_members.each do |tm|
-      if tm.created_at > proj_date
-        relevant_team_members << tm
-      end
-    end
-  puts relevant_team_members.join(', ') unless relevant_team_members.empty?
-    return relevant_team_members.size
-  end
+  team_members = TeamMember.includes(:projects).where("team_members.created_at > projects.created_at" )
+  return team_members.size
 end
 
 #Query Q7***************************************************************************************************************
 #Scan all documents and return their ids
-def query_7
-  document_ids = []
-  documents = Document.find(:all)
-  documents.each do |doc|
-    document_ids << doc.id
-  end
-  #puts document_ids.join(', ')
-  return document_ids.size
 
+def query_7
+  document_ids = Document.pluck(:id)
+  return document_ids.size
 end
 
 #Query Q8: ad-hoc join**************************************************************************************************
@@ -275,16 +268,8 @@ end
 #legal_contract. Also, return a count of the number of such pairs encountered.
 
 def query_8
-  contracts = LegalContract.find(:all)
-  documents = Document.find(:all)
-  all_relevant_docs = []
-  all_relevant_docs_count = 0
-  contracts.each do |contract|
-    pairs = Document.select {|doc| doc.contract_id == contract.id.to_s }
-    all_relevant_docs  << pairs
-    all_relevant_docs_count += pairs.to_a.count
-  end
-  return all_relevant_docs_count
+  all_relevant_docs = Document.joins(project: [:legal_contract]).where("legal_contracts.id = documents.contract_id" )
+  return all_relevant_docs.count
 end
 #STRUCTURAL MODIFICATIONS
 
@@ -295,12 +280,15 @@ end
 def modification_1_insert
   projects =[]
   5.times do |project|
-     proj = Project.create!(
+    proj = Project.new(
         :budget             => 300000.0,
         :delivery_deadline  => '2015-02-12',
         :status             =>  "Planning"
-     )
+    )
     projects << proj
+  end
+  Project.transaction do
+    projects.each { |project | project.save!}
   end
 
   documents = []
@@ -317,6 +305,8 @@ def modification_1_insert
     end
   end
   Document.import documents
+
+  contracts = []
   projects.each do |project|
     contract = LegalContract.new(
         :project_id => project.id,
@@ -325,70 +315,29 @@ def modification_1_insert
         :revised_on => '2013-12-12',
         :copy_stored => 'electronic version'
     )
-    contract.save!
+    contracts << contract
   end
-  return projects
+  LegalContract.import contracts
+
+  return projects.size
 end
+
 #Structural Modification 2: Delete**************************************************************************************
 #Delete the five newly created projects (and all of their associated documents and legal_contract objects).
 def modification_2_deletion
-  projects = modification_1_insert
+  projects = Project.find(:all, :order => "id desc", :limit => 5)
   projects.each do |project|
     Document.where(:project_id => project.id).destroy_all
-    LegalContract.find_by_project_id(project.id).destroy
+    LegalContract.where(:project_id => project.id).destroy_all
     project.destroy
   end
  return "deleted"
 end
 
 Benchmark.bm do |x|
-  x.report("ActiveRecord#traversal_2a \n") do
-    puts traversal_2a
-  end
-  x.report("ActiveRecord#traversal_2b \n") do
-    puts traversal_2b
-  end
-  x.report("ActiveRecord#traversal_2c \n") do
-    puts traversal_2c
-  end
-  x.report("ActiveRecord#traversal_3 \n") do
-    puts traversal_3
-  end
-  x.report("ActiveRecord#traversal_6 \n") do
-    puts traversal_6
-  end
-  x.report("ActiveRecord#traversal_8 \n") do
-    puts traversal_8
-  end
-  x.report("ActiveRecord#traversal_9 \n") do
-    puts traversal_9
-  end
-  x.report("ActiveRecord#query_1 \n") do
-    puts query_1
-  end
-  x.report("ActiveRecord#query_2 \n") do
-    puts query_2
-  end
-  x.report("ActiveRecord#query_3 \n") do
-    puts query_3
-  end
-  x.report("ActiveRecord#query_4 \n") do
-    puts query_4
-  end
-  x.report("ActiveRecord#query_5 \n") do
-    puts query_5
-  end
-  x.report("ActiveRecord#query_7 \n") do
-    puts query_7
-  end
+
   x.report("ActiveRecord#query_8 \n") do
     puts query_8
-  end
-  x.report("ActiveRecord#modification_insert \n") do
-    modification_1_insert
-  end
-  x.report("ActiveRecord#modification_deletion \n") do
-    modification_2_deletion
   end
 
 end

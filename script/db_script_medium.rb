@@ -290,12 +290,12 @@ ActiveRecord::Base.transaction do
     revision_date = row[3]
 
     if index_num%100==0
-      contract_id = legal_contract_ids[indexes.pop]
+      contract_id = Project.find(proj_id).legal_contract.id
     else
-      contract_id = "N/A"
+      contract_id = -1
     end
 
-    docs_inserts << "(#{proj_id}, '#{contract_id}', '#{doc_type}', '#{doc_name}', '#{revision_number}', '#{revision_date}', now(), now())"
+    docs_inserts << "(#{proj_id}, #{contract_id}, '#{doc_type}', '#{doc_name}', '#{revision_number}', '#{revision_date}', now(), now())"
   end
 
   unless docs_inserts.empty?

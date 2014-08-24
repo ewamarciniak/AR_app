@@ -13,7 +13,11 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= link_to "#{name(project.client.person)}/ #{project.client.person.company.company_name}",  project.client %></td>
+    <% if project.client %>
+        <td><%= link_to "#{name(project.client.person)}/ #{project.client.person.company.company_name}",  project.client %></td>
+    <% else %>
+        <td></td>
+    <% end %>
     <td><%= project.budget %></td>
     <td><%= project.delivery_deadline %></td>
     <td><%= project.status %></td>
