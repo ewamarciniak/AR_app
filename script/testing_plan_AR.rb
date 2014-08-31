@@ -238,15 +238,6 @@ def query_4
   return team_members.size
 end
 
-def query_4a
-  team_members_num = 0
-  LegalContract.find_each do |contract|
-    projects_team_members = contract.project.team_members.find(:all)
-    team_members_num += projects_team_members.size
-  end
-  return team_members_num
-end
-
 #Query Q5: single-level make********************************************************************************************
 #Find all Team_members that use a project with a build date later than the build date of the team_member. Also, report
 #the number of qualifying team_members found.
@@ -335,9 +326,44 @@ def modification_2_deletion
 end
 
 Benchmark.bm do |x|
-
+  x.report("ActiveRecord#traversal_1 \n") do
+    puts traversal_1
+  end
+  x.report("ActiveRecord#traversal_2a \n") do
+    puts traversal_2a
+  end
+  x.report("ActiveRecord#traversal_2b \n") do
+    puts traversal_2b
+  end
+  x.report("ActiveRecord#traversal_2c \n") do
+    puts traversal_2c
+  end
+  x.report("ActiveRecord#query_1 \n") do
+    puts query_1
+  end
+  x.report("ActiveRecord#query_2 \n") do
+    puts query_2
+  end
+  x.report("ActiveRecord#query_3 \n") do
+    puts query_3
+  end
+  x.report("ActiveRecord#query_4 \n") do
+    puts query_4
+  end
+  x.report("ActiveRecord#query_5 \n") do
+    puts query_5
+  end
+  x.report("ActiveRecord#query_7 \n") do
+    puts query_7
+  end
   x.report("ActiveRecord#query_8 \n") do
     puts query_8
+  end
+  x.report("ActiveRecord#modification_insert \n") do
+    modification_1_insert
+  end
+  x.report("ActiveRecord#modification_deletion \n") do
+    modification_2_deletion
   end
 
 end

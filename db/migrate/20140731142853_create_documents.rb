@@ -11,5 +11,6 @@ class CreateDocuments < ActiveRecord::Migration
       t.timestamps
     end
     add_index :documents, :project_id
+    add_index :documents, :revision_date
   end
 end

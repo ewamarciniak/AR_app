@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20140731142853) do
   end
 
   add_index "documents", ["project_id"], :name => "index_documents_on_project_id"
+  add_index "documents", ["revision_date"], :name => "index_documents_on_revision_date"
 
   create_table "legal_contracts", :force => true do |t|
     t.integer  "project_id"

@@ -25,9 +25,8 @@
     <% elsif is_client?(company) %>
         <td><%= link_to "Client details", company_client(company.id) %></td>
     <% else %>
-        <td><%= link_to "Add Client", new_client_path %></td>
-        |
-        <td><%= link_to "Add Team Member", new_team_member_path %></td>
+        <td><%= link_to "Add Client", new_client_path %> |
+        <%= link_to "Add Team Member", new_team_member_path %></td>
     <% end %>
 
     <td><%= link_to 'Show', company %></td>
