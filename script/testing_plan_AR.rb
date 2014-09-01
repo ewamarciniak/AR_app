@@ -23,12 +23,12 @@ end
 # Establish connection to the DB based on the 'development'.
 ActiveRecord::Base.establish_connection(db_config["database"])
 #ActiveRecord::Base.logger = Logger.new(STDOUT)
-#TRAVERSALS
 
-#T1: Raw traversal speed************************************************************************************************
-#Traverse the Person hierarchy. As each team_member is visited, visit each of its referenced unshared Projects. As each
-# project is visited, perform a depth first search on its graph of documents. Return a count of the number of documents
-# visited when done./NO DEPTH FIRST SEARCH
+#***********************************************************************************************************************
+#*                                                                                                                     *
+#*                                                     TRAVERSALS                                                      *
+#*                                                                                                                     *
+#***********************************************************************************************************************
 
 #Traversal T2: Traversal with updates***********************************************************************************
 #Repeat Traversal T1, but update objects during the traversal. There are three types of update patterns in this
@@ -107,7 +107,6 @@ def traversal_2c
   return docs
 end
 
-
 #Traversal T3: Traversal with indexed field updates*********************************************************************
 #Repeat Traversal T2, except that now the update is on the date field, which is indexed. The specific update is to
 # increment the date if it is odd, and decrement the date if it is even.
@@ -119,7 +118,6 @@ def traversal_3
     team_member.projects.each do |project|
       documents = Document.where(:project_id => project.id)
       documents.each do |doc|
-        #visiting instead of returning the size
         docs+=1
 
         day = doc.revision_date.mday
@@ -180,7 +178,11 @@ def traversal_9
   return num_occurances
 end
 
-#QUERIES
+#***********************************************************************************************************************
+#*                                                                                                                     *
+#*                                                     QUERIES                                                         *
+#*                                                                                                                     *
+#***********************************************************************************************************************
 
 #Query Q1: exact match lookup*******************************************************************************************
 #Generate 10 random Document ids; for each generated lookup the document with that id. Return the number of documents
@@ -262,7 +264,12 @@ def query_8
   all_relevant_docs = Document.joins(project: [:legal_contract]).where("legal_contracts.id = documents.contract_id" )
   return all_relevant_docs.count
 end
-#STRUCTURAL MODIFICATIONS
+
+#***********************************************************************************************************************
+#*                                                                                                                     *
+#*                                                     MODIFICATIONS                                                   *
+#*                                                                                                                     *
+#***********************************************************************************************************************
 
 #Structural Modification 1: Insert**************************************************************************************
 #Create five new projects, which includes creating a number of new documents (100 in the small configuration, 1000 in
@@ -326,9 +333,6 @@ def modification_2_deletion
 end
 
 Benchmark.bm do |x|
-  x.report("ActiveRecord#traversal_1 \n") do
-    puts traversal_1
-  end
   x.report("ActiveRecord#traversal_2a \n") do
     puts traversal_2a
   end
@@ -337,6 +341,18 @@ Benchmark.bm do |x|
   end
   x.report("ActiveRecord#traversal_2c \n") do
     puts traversal_2c
+  end
+  x.report("ActiveRecord#traversal_3 \n") do
+    puts traversal_3
+  end
+  x.report("ActiveRecord#traversal_6 \n") do
+    puts traversal_6
+  end
+  x.report("ActiveRecord#traversal_8 \n") do
+    puts traversal_8
+  end
+  x.report("ActiveRecord#traversal_9 \n") do
+    puts traversal_9
   end
   x.report("ActiveRecord#query_1 \n") do
     puts query_1
