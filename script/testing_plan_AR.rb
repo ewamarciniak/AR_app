@@ -332,7 +332,7 @@ def modification_2_deletion
  return "deleted"
 end
 
-Benchmark.bm do |x|
+Benchmark.bmbm do |x|
   x.report("ActiveRecord#traversal_2a \n") do
     puts traversal_2a
   end
