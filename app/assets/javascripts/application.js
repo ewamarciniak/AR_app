@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require foundation
+//= require modernizr
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
