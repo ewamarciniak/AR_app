@@ -19,5 +19,5 @@
 $(function(){ $(document).foundation(); });
 
 $(function (){
-    $('#legal_contract_signed_on, ##legal_contract_revised_on, #project_delivery_deadline').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#legal_contract_signed_on, #legal_contract_revised_on, #project_delivery_deadline, #document_revision_date').datepicker({dateFormat: 'yy-mm-dd'});
 });

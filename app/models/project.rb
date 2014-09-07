@@ -6,4 +6,8 @@ class Project < ActiveRecord::Base
   has_one :legal_contract
   has_many :documents
   attr_accessible :budget, :delivery_deadline, :status
+
+  def project_client
+    "Client:" +  client.person.first_name + " " + client.person.last_name
+  end
 end

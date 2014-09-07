@@ -14,11 +14,10 @@
 
     <div class="row collapse">
       <div class="small-3 columns">
-        <%= f.label :project, class: "right inline"  %>
-        <br/>
+        <%= f.label :project_client, class: "right inline" %>
       </div>
-      <div class="small-7 columns left">
-        <%= f.text_field :project %>
+      <div class="small-9 columns">
+        <%= f.collection_select(:project_id, Project.all, :id, :project_client, {include_blank: true, :data => {:placeholder => "Select project"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", }) %>
       </div>
     </div>
 

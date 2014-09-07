@@ -1,59 +1,93 @@
 <%= form_for(@team_member) do |f| %>
-  <% if @team_member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team_member.errors.count, "error") %> prohibited this team_member from being saved:</h2>
+    <% if @team_member.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@team_member.errors.count, "error") %> prohibited this team_member from being saved:</h2>
 
-      <ul>
-      <% @team_member.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-    <%= f.fields_for :person do |ff| %>
-        <div>
-          <%= ff.label :first_name %>
-          <%= ff.text_field :first_name %>
-        </div>
-
-        <div>
-          <%= ff.label :last_name %>
-          <%= ff.text_field :last_name %>
-        </div>
-        <div>
-          <%= ff.label :phone_number %>
-          <%= ff.text_field :phone_number %>
-        </div>
-
-        <div>
-          <%= ff.label :email %>
-          <%= ff.text_field :email %>
-        </div>
-        <div class="small-3 columns">
-          <%= f.label :company, class: "right inline" %>
-        </div>
-        <div class="small-7 columns">
-          <%= ff.collection_select(:company_id, Company.all, :id, :company_name, {include_blank: true, :data => {:placeholder => "Select company"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", }) %>
+          <ul>
+            <% @team_member.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
         </div>
     <% end %>
+    <%= f.fields_for :person do |ff| %>
 
-  <div class="field">
-    <%= f.label :team %><br />
-    <%= f.text_field :team %>
-  </div>
-  <div class="field">
-    <%= f.label :experience_level %><br />
-    <%= f.text_field :experience_level %>
-  </div>
-  <div class="field">
-    <%= f.label :qualification %><br />
-    <%= f.text_field :qualification %>
-  </div>
-  <div class="field">
-    <%= f.label :lead %><br />
-    <%= f.check_box :lead %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+        <div class="row collapse">
+          <div class="small-3 columns">
+            <%= ff.label :first_name, class: "right inline" %>
+          </div>
+          <div class="small-7 columns left">
+            <%= ff.text_field :first_name %>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-3 columns">
+            <%= ff.label :last_name, class: "right inline" %>
+          </div>
+          <div class="small-7 columns left">
+            <%= ff.text_field :last_name %>
+          </div>
+        </div>
+        <div class="row collapse">
+        <div class="small-3 columns">
+          <%= ff.label :phone_number, class: "right inline" %>
+        </div>
+        <div class="small-7 columns left">
+          <%= ff.text_field :phone_number %>
+        </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-3 columns">
+            <%= ff.label :email, class: "right inline" %>
+          </div>
+          <div class="small-7 columns left">
+            <%= ff.text_field :email%>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-3 columns">
+            <%= ff.label :company, class: "right inline" %>
+          </div>
+          <div class="small-7 columns left">
+            <%= ff.collection_select(:company_id, Company.all, :id, :company_name, {include_blank: true, :data => {:placeholder => "Select company"}}, {:class => "chosen-select", :tabindex => "-1", :style => "width:350px;", :placeholder => "(optional)" }) %>
+          </div>
+        </div>
+    <% end %>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :team, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :team %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :experience_level, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :experience_level %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :qualification, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.text_field :qualification %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-3 columns">
+        <%= f.label :lead, class: "right inline" %>
+      </div>
+      <div class="small-7 columns left">
+        <%= f.check_box :lead %>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-9 small-offset-3 columns">
+        <%= f.submit %>
+      </div>
+    </div>
 <% end %>

@@ -20,7 +20,11 @@
         <td><%= client.person.last_name %></td>
         <td><%= client.person.phone_number %></td>
         <td><%= client.person.email %></td>
-        <td><%= client.person.company.company_name %></td>
+        <% if client.person.company %>
+            <td><%= client.person.company.company_name %></td>
+        <% else %>
+            <td></td>
+        <% end %>
         <td><%= client.pref_method_of_contact %></td>
         <td><%= client.pref_hours_of_contact %></td>
         <td><%= link_to 'Show', client %></td>
